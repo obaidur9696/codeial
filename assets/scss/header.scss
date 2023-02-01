@@ -1,0 +1,27 @@
+#nav-list {
+    background-color: black;
+    height: 7%;
+    width: 97%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    
+
+    li {
+        list-style: none;
+
+  
+
+        a {
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+            border: 2px solid grey;
+            margin-left: 1rem;
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+    }
+}

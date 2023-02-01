@@ -1,0 +1,9 @@
+#footer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: black;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 5rem; }

@@ -1,0 +1,75 @@
+<link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="/css/chat_box.css">
+
+<!-- locals.user is global which contain the address of current user log in -->
+<%if (locals.user){%>
+    <p>
+        <%=locals.user.email%>
+    </p>
+    <%}%>
+
+        <div id="home-container">
+
+            <section id="feed-post">
+                <h1>Posts</h1>
+                <%if (locals.user){%>
+                    <form action="/post/create" id="post-form" method="post">
+                        <textarea name="content" cols="30" rows="3" placeholder="Enter your text post"
+                            required></textarea> <br>
+                        <input type="submit" value="Post">
+                    </form>
+                    <%}%>
+
+
+
+                        <div id="post-container">
+                            <ul>
+                                <%for(post of posts){%>
+
+                                    <%- include('_post') -%>
+                                        <%}%>
+                            </ul>
+                        </div>
+
+            </section>
+
+            <section id="user-friends">
+                <h1>Friends</h1>
+                <%for(u of all_user){%>
+                    <p>
+                        <a href="/users/profile/<%=u.id%>">
+                            <%=u.name%>
+                        </a>
+                    </p>
+                    <%}%>
+
+            </section>
+
+            <%- include('_chat_box') -%>
+        </div>
+
+        <!-- cdn jquery -->
+        <script src="https://code.jquery.com/jquery-3.6.1.js"
+            integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+        <!-- socket.io chat engine. -->
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js"></script> -->
+
+        <script type="importmap">
+    {
+      "imports": {
+        "socket.io-client": "https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js"
+      }
+    }
+  </script>
+
+
+
+        <script src="/js/chat_engine.js"></script>
+
+        <!-- if user log in then user can established chatting connection. -->
+        <%if (locals.user){%>
+            <script>
+                new ChatEngine('user-chat-box', '<%=locals.user.email%>')
+            </script>
+            <%}%>
